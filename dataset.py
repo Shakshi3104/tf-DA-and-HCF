@@ -28,4 +28,4 @@ if __name__ == "__main__":
     ds_raw_hcf_batch = tf.data.Dataset.from_tensor_slices((x, y)).batch(5).map(raw_and_extract_batch)
 
     # 6: データ拡張 + 特徴量抽出
-    ds_da_hcf_batch = tf.data.Dataset.from_tensor_slices((x, y)).batch(5).map(augment_and_extract)
+    ds_da_hcf_batch = tf.data.Dataset.from_tensor_slices((x, y)).batch(5).map(augment_and_extract).repeat(3)
