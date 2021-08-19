@@ -2,7 +2,7 @@ import numpy as np
 import scipy.stats as sp
 import tensorflow as tf
 
-from augmentation import flipping_batch, swapping_batch
+from augmentation import flipping, swapping
 
 
 def extracting_features(x, axis=1):
@@ -42,8 +42,8 @@ def raw_and_extract_batch(x, y):
 
 @tf.function
 def augment_and_extract(x, y):
-    x, y = tf.py_function(flipping_batch, [x, False], tf.float64), y
-    x, y = tf.py_function(swapping_batch, [x], tf.float64), y
+    x, y = tf.py_function(flipping, [x, False, 1], tf.float64), y
+    x, y = tf.py_function(swapping, [x], tf.float64), y
     x, f, y = x, tf.py_function(extracting_features, [x, 1], tf.float64), y
     return (x, f), y
 
